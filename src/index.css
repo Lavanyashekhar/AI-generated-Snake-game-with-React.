@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: "Press Start 2P", monospace;
+  --font-sys: "VT323", monospace;
+}
+
+body {
+  background-color: #000;
+  color: #00FFFF;
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  overflow-x: hidden;
+}
+
+.bg-noise {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.glitch-text {
+  position: relative;
+  font-family: "Press Start 2P", monospace;
+  color: #00FFFF;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.glitch-text::before {
+  left: 4px;
+  text-shadow: -2px 0 #FF00FF;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -4px;
+  text-shadow: -2px 0 #00FFFF;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(15px, 9999px, 71px, 0); }
+  20% { clip: rect(55px, 9999px, 12px, 0); }
+  40% { clip: rect(89px, 9999px, 43px, 0); }
+  60% { clip: rect(12px, 9999px, 98px, 0); }
+  80% { clip: rect(76px, 9999px, 34px, 0); }
+  100% { clip: rect(34px, 9999px, 87px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(12px, 9999px, 54px, 0); }
+  40% { clip: rect(87px, 9999px, 23px, 0); }
+  60% { clip: rect(43px, 9999px, 76px, 0); }
+  80% { clip: rect(98px, 9999px, 12px, 0); }
+  100% { clip: rect(23px, 9999px, 89px, 0); }
+}
+
+.screen-tear {
+  animation: tear 4s infinite;
+}
+
+@keyframes tear {
+  0%, 95% { transform: translate(0, 0) skewX(0); }
+  96% { transform: translate(4px, 2px) skewX(10deg); }
+  97% { transform: translate(-4px, -2px) skewX(-10deg); }
+  98% { transform: translate(0, 0) skewX(0); }
+}
